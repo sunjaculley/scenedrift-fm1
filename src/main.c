@@ -253,7 +253,7 @@ static void start_note(int lane, int pitch_lock, int level, int send, int hold_m
     int32_t cw = 32768 - (int32_t)(((int64_t)ac * (100 - k[K_DMIX])) / 100); /* centre weight */
     int32_t g = (19661 + ((13107 * cw) >> 15)) / uni;                         /* (0.6 + 0.4 cw) / N */
     int32_t pan = (int32_t)(((int64_t)c * k[K_WIDTH]) / 100);                 /* -1..1 */
-    uint32_t ang = (uint32_t)(pan + 32768) << 13;                             /* (pan + 1) pi / 4 */
+    uint32_t ang = (uint32_t)(pan + 32768) << 14; /* (pan + 1) pi / 4 */
     n->gl[i] = (int16_t)((g * sine(ang + 1073741824u)) >> 15);
     n->gr[i] = (int16_t)((g * sine(ang)) >> 15);
   }
